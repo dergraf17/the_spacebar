@@ -9,10 +9,11 @@
 namespace App\Controller;
 
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AricleController
+class AricleController extends AbstractController
 {
     /**
      * Matches /blog exactly
@@ -31,7 +32,18 @@ class AricleController
      */
     public function show($slug) {
 
-        return new Response(sprintf('Future page to show one space article: %s', $slug));
+        $comments = [
+            'Hallo, das ist wieder einmal ein besonderer Tag!',
+            'Autofahren macht Spaß.',
+            'Niemmand will der Schnellste sein'
+        ];
+
+        return $this->render('article/show.html.twig', [
+            "title" => ucwords(str_replace('-', ' ', $slug)),
+            "comments" => $comments,
+        ]);
+
+
 
     }
 }
